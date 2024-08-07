@@ -1,6 +1,5 @@
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import ProcessComparison from './ProcessComparison';
-import InteractiveGraph from './InteractiveGraph';
 
 const Dashboard = ({ deals }) => {
   const statusCounts = deals.reduce((acc, deal) => {
@@ -15,7 +14,7 @@ const Dashboard = ({ deals }) => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Deal Flow Dashboard</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           <h3 className="text-xl font-semibold mb-2">Deal Status Distribution</h3>
           <PieChart width={400} height={300}>
@@ -46,11 +45,7 @@ const Dashboard = ({ deals }) => {
           </ul>
         </div>
       </div>
-      <div className="mb-8">
-        <h3 className="text-xl font-semibold mb-2">AI Screening Impact</h3>
-        <InteractiveGraph />
-      </div>
-      <div>
+      <div className="mt-8">
         <ProcessComparison />
       </div>
     </div>
