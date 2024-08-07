@@ -1,12 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import DealSubmission from '../components/DealSubmission';
+import AIAgentEvaluation from '../components/AIAgentEvaluation';
+import Dashboard from '../components/Dashboard';
 
 const Index = () => {
+  const [deals, setDeals] = useState([]);
+
+  const addDeal = (deal) => {
+    setDeals([...deals, { ...deal, id: Date.now(), status: 'Pending' }]);
+  };
+
+  const updateDealStatus = (id, status) => {
+    setDeals(deals.map(deal => deal.id === id ? { ...deal, status } : deal));
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">AI Multi-Agent Deal Flow Screening</h1>
+      <Tabs defaultValue="submit">
+        <TabsList className="mb-4">
+          <TabsTrigger value="submit">Submit Deal</TabsTrigger>
+          <TabsTrigger value="evaluate">AI Evaluation</TabsTrigger>
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+        </TabsList>
+        <TabsContent value="submit">
+          <DealSubmission onSubmit={addDeal} />
+        </TabsContent>
+        <TabsContent value="evaluate">
+          <AIAgentEvaluation deals={deals} updateDealStatus={updateDealStatus} />
+        </TabsContent>
+        <TabsContent value="dashboard">
+          <Dashboard deals={deals} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
