@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import DealSubmission from '../components/DealSubmission';
 import AIAgentEvaluation from '../components/AIAgentEvaluation';
 import Dashboard from '../components/Dashboard';
+import ProcessComparison from '../components/ProcessComparison';
 
 const Index = () => {
   const [deals, setDeals] = useState([]);
@@ -23,6 +24,7 @@ const Index = () => {
           <TabsTrigger value="submit">Submit Deal</TabsTrigger>
           <TabsTrigger value="evaluate">AI Evaluation</TabsTrigger>
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="process">Process Breakdown</TabsTrigger>
         </TabsList>
         <TabsContent value="submit">
           <DealSubmission onSubmit={addDeal} />
@@ -32,6 +34,9 @@ const Index = () => {
         </TabsContent>
         <TabsContent value="dashboard">
           <Dashboard deals={deals} />
+        </TabsContent>
+        <TabsContent value="process">
+          <ProcessComparison />
         </TabsContent>
       </Tabs>
     </div>
